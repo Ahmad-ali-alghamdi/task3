@@ -1,0 +1,249 @@
+{
+  "intents": [
+    {
+      "intent": "استفسارات",
+      "examples": [
+        {
+          "text": "استفسارات"
+        },
+        {
+          "text": "هل الروبوت قابل للبيع؟"
+        },
+        {
+          "text": "هل الروبوت له جهاز تحكم؟"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "ترحيب",
+      "examples": [
+        {
+          "text": "السلام عليكم"
+        },
+        {
+          "text": "اهلا"
+        },
+        {
+          "text": "مرحبا"
+        },
+        {
+          "text": "هيلو"
+        }
+      ],
+      "description": ""
+    }
+  ],
+  "entities": [
+    {
+      "entity": "sys-date",
+      "values": [],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "sys-number",
+      "values": [],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "sys-time",
+      "values": [],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "التحركات",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "اسفل",
+          "synonyms": [
+            "تحت"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "اعلى",
+          "synonyms": [
+            "فوق "
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "توقف",
+          "synonyms": [
+            "لاتتحرك"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "يسار",
+          "synonyms": [
+            "الى اليسار "
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "يمين",
+          "synonyms": [
+            "‎‫الى اليمين‬‎"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "dialog_nodes": [
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_2_1625497378981",
+      "event_name": "focus",
+      "dialog_node": "handler_10_1625497379016",
+      "previous_sibling": "handler_8_1625497379016"
+    },
+    {
+      "type": "event_handler",
+      "parent": "slot_2_1625497378981",
+      "event_name": "input",
+      "dialog_node": "handler_8_1625497379016"
+    },
+    {
+      "type": "standard",
+      "title": "هل الروبوت قابل للبيع؟",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "نعم"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#استفسارات",
+      "dialog_node": "node_10_1625499858937",
+      "previous_sibling": "مرحبا"
+    },
+    {
+      "type": "standard",
+      "title": "السلام عليكم ",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "عليكم السلام"
+              },
+              {
+                "text": "عليكم السلام ورحمة الله وبركاته"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#ترحيب",
+      "dialog_node": "node_2_1625495338943",
+      "previous_sibling": "node_2_1625497325064"
+    },
+    {
+      "type": "frame",
+      "title": "استفسارات",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "تفضل؟"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#استفسارات",
+      "dialog_node": "node_2_1625497325064",
+      "previous_sibling": "node_10_1625499858937"
+    },
+    {
+      "type": "slot",
+      "parent": "node_2_1625497325064",
+      "dialog_node": "slot_2_1625497378981"
+    },
+    {
+      "type": "standard",
+      "title": "أي شيء آخر",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "لم أفهم، يمكنك محاولة اعادة الصياغة"
+              },
+              {
+                "text": "هل يمكنك اعادة صياغة عبارتك؟ أنا لا فهم"
+              },
+              {
+                "text": "لم أفهم قصدك"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "dialog_node": "أي شيء آخر",
+      "previous_sibling": "node_2_1625495338943",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "standard",
+      "title": "مرحبا",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "ياهلا؟"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "welcome",
+      "dialog_node": "مرحبا"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "disambiguation": {
+      "prompt": ":هل قصدت",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "كل ما سبق خطأ"
+    },
+    "human_agent_assist": {
+      "prompt": ":هل قصدت"
+    }
+  },
+  "learning_opt_out": false,
+  "name": "task3 T",
+  "language": "ar",
+  "description": ""
+}
